@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SideChat Settings</title>
+<style>
+  :root { --bg:#fbfaf7; --fg:#1f1e1c; --muted:#6f6b63; --line:#e3dfd6; --accent:#c96442; --card:#fff; }
+  @media (prefers-color-scheme: dark) { :root { --bg:#1f1e1d; --fg:#ecebe6; --muted:#a39f95; --line:#3d3c38; --accent:#d97757; --card:#262624; } }
+  * { box-sizing:border-box; }
+  body { margin:0; background:var(--bg); color:var(--fg); font:14px/1.5 system-ui,-apple-system,"Segoe UI",sans-serif; }
+  main { max-width:760px; margin:0 auto; padding:32px 16px 64px; }
+  h1 { font-size:22px; margin:0 0 4px; } h2 { font-size:16px; margin:28px 0 10px; }
+  .sub { color:var(--muted); margin:0 0 20px; }
+  .card { background:var(--card); border:1px solid var(--line); border-radius:12px; padding:16px; }
+  label { display:block; font-weight:600; margin:12px 0 4px; } label:first-child { margin-top:0; }
+  .hint { color:var(--muted); font-size:12.5px; font-weight:400; }
+  input, select { width:100%; padding:8px 10px; border:1px solid var(--line); border-radius:8px; background:var(--bg); color:var(--fg); font:inherit; }
+  button { border:1px solid var(--line); background:var(--card); color:var(--fg); padding:7px 12px; border-radius:8px; cursor:pointer; font:inherit; }
+  button.primary { background:var(--accent); border-color:var(--accent); color:#fff; font-weight:600; }
+  .row { display:flex; gap:8px; align-items:center; margin-top:14px; flex-wrap:wrap; }
+  #saved { color:var(--muted); font-size:13px; }
+  #search { margin-bottom:10px; }
+  .item { border:1px solid var(--line); border-radius:10px; margin-bottom:8px; background:var(--card); }
+  .item summary { padding:10px 12px; cursor:pointer; display:flex; gap:8px; align-items:baseline; }
+  .item summary b { flex:1; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+  .meta { color:var(--muted); font-size:12px; white-space:nowrap; }
+  .turns { padding:0 12px 12px; }
+  .turns pre { white-space:pre-wrap; font:inherit; margin:4px 0 10px; }
+  .q { font-weight:600; } .quote { border-left:3px solid var(--accent); padding-left:8px; color:var(--muted); white-space:pre-wrap; max-height:120px; overflow:auto; }
+  a { color:var(--accent); }
+</style>
+</head>
+<body>
+<main>
+  <h1 style="display:flex;align-items:center;gap:10px"><img src="icons/icon48.png" width="32" height="32" alt="">SideChat</h1>
+  <p class="sub">Highlight text on any page, click <b>✦ Ask</b> (or press <b>Alt+Shift+S</b>, or right-click → Ask SideChat).</p>
+
+  <div class="card">
+    <label for="engine">Engine</label>
+    <select id="engine">
+      <option value="auto">Auto — claude.ai session, fall back to API key</option>
+      <option value="claude">claude.ai session only (no API key needed)</option>
+      <option value="api">Anthropic API key only</option>
+    </select>
+    <label for="webModel">claude.ai model <span class="hint">— optional model id, e.g. claude-sonnet-5. Blank uses your account default.</span></label>
+    <input id="webModel" placeholder="(account default)">
+    <label for="apiKey">Anthropic API key <span class="hint">— stored only in this browser profile</span></label>
+    <input id="apiKey" type="password" autocomplete="off" placeholder="sk-ant-…">
+    <label for="apiModel">API model</label>
+    <input id="apiModel">
+    <div class="row"><button class="primary" id="save">Save</button><span id="saved"></span></div>
+  </div>
+
+  <h2>History</h2>
+  <input id="search" placeholder="Search history…">
+  <div id="history"></div>
+  <div class="row"><button id="clear">Clear history</button></div>
+</main>
+<script src="options.js"></script>
+</body>
+</html>
