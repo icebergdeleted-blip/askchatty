@@ -1,4 +1,4 @@
-// SideChat content script.
+// AskChatty content script.
 // Highlight text on any page → click "Ask" → a draggable, resizable widget runs
 // its own hidden Claude conversation and streams the reply in. On claude.ai the
 // request goes straight to claude.ai's own API with your session; elsewhere it is
@@ -28,7 +28,7 @@
   };
 
   const ON_CLAUDE = /(^|\.)claude\.ai$/.test(location.hostname);
-  const CONV_NAME = "↪ SideChat";
+  const CONV_NAME = "↪ AskChatty";
   const ROOT_PARENT = "00000000-0000-4000-8000-000000000000";
   const SETTINGS_DEFAULTS = { engine: "auto", apiKey: "", apiModel: "claude-sonnet-5-5", webModel: "" };
 
@@ -160,7 +160,7 @@
       liveConvs.delete(state.convId);
     },
 
-    // Delete SideChat conversations left behind by crashed tabs/closed windows.
+    // Delete AskChatty conversations left behind by crashed tabs/closed windows.
     // Only touches threads still carrying the exact hidden name and idle >15 min.
     async sweepOrphans() {
       const orgId = await claudeOrgId();
@@ -376,7 +376,7 @@
     root.appendChild(t);
     setTimeout(() => t.remove(), ms);
   }
-  if (IS_PDF) setTimeout(() => toast("SideChat: select text, then right-click → Ask SideChat", 6000), 1200);
+  if (IS_PDF) setTimeout(() => toast("Select text, then right-click → AskChatty: ask about…", 6000), 1200);
 
   // Text fields keep their selection out of window.getSelection(), so read them directly.
   function fieldSelection() {
@@ -485,7 +485,7 @@
     root.appendChild(panel);
     const $ = (s) => panel.querySelector(s);
     const body = $(".body"), input = $("textarea"), sendBtn = $(".send"), keepBtn = $(".keep");
-    $(".title").textContent = quote ? "“" + quote.replace(/\s+/g, " ").slice(0, 60) + "”" : "SideChat";
+    $(".title").textContent = quote ? "“" + quote.replace(/\s+/g, " ").slice(0, 60) + "”" : "AskChatty";
 
     let state, entry, controller = null;
     function reset() {
@@ -595,7 +595,7 @@
           bot.className = "msg err";
           bot.textContent = String(e.message || e);
           if (/not signed in|claude\.ai tab/i.test(bot.textContent))
-            bot.textContent += " — open claude.ai and sign in, or add an API key in SideChat settings.";
+            bot.textContent += " — open claude.ai and sign in, or add an API key in AskChatty settings.";
         }
       } finally {
         controller = null;
@@ -649,7 +649,7 @@
     keepBtn.onclick = async () => {
       if (state.keep || !state.convId) return;
       try {
-        const title = entry.turns[0]?.q || quote || "SideChat";
+        const title = entry.turns[0]?.q || quote || "AskChatty";
         if (ON_CLAUDE) await claude.rename(state, title);
         else {
           const r = await chrome.runtime.sendMessage({

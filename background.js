@@ -1,4 +1,4 @@
-// SideChat background worker.
+// AskChatty background worker.
 // - Context menu + keyboard shortcut open a widget for the current selection.
 // - Widgets on non-claude.ai pages stream through here: the request runs inside a
 //   claude.ai tab (your logged-in session, no API key), or falls back to the
@@ -14,7 +14,7 @@ const getSettings = () => chrome.storage.local.get(DEFAULTS);
 
 chrome.runtime.onInstalled.addListener(async () => {
   chrome.contextMenus.removeAll(() => {
-    chrome.contextMenus.create({ id: "sidechat-ask", title: 'Ask SideChat about "%s"', contexts: ["selection"] });
+    chrome.contextMenus.create({ id: "sidechat-ask", title: 'AskChatty: ask about "%s"', contexts: ["selection"] });
   });
   // Manifest content scripts only reach pages loaded after install/reload, so
   // tabs that were already open would show no Ask button until refreshed.

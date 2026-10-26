@@ -1,4 +1,4 @@
-// Generates icon SVGs for SideChat: a Claude-orange tile with a cream spark
+// Generates icon SVGs for AskChatty: a Claude-orange tile with a cream spark
 // burst around a disc carrying an "S". Small sizes drop the rays so they stay crisp.
 // Usage: node make-icons.js  → writes icon-<size>.svg next to this file.
 const fs = require("fs");

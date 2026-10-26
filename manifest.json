@@ -1,6 +1,6 @@
 {
   "manifest_version": 3,
-  "name": "SideChat (personal)",
+  "name": "AskChatty",
   "version": "1.0.0",
   "description": "Highlight text on any page and ask Claude focused follow-ups in a floating side-chat.",
   "permissions": ["storage", "contextMenus", "scripting", "declarativeNetRequestWithHostAccess"],
@@ -8,7 +8,7 @@
   "background": { "service_worker": "background.js" },
   "icons": { "16": "icons/icon16.png", "32": "icons/icon32.png", "48": "icons/icon48.png", "128": "icons/icon128.png" },
   "action": {
-    "default_title": "SideChat settings & history",
+    "default_title": "AskChatty settings & history",
     "default_icon": { "16": "icons/icon16.png", "32": "icons/icon32.png" }
   },
   "web_accessible_resources": [{ "resources": ["icons/icon32.png"], "matches": ["<all_urls>"] }],
@@ -16,7 +16,7 @@
   "commands": {
     "ask-selection": {
       "suggested_key": { "default": "Alt+Shift+S" },
-      "description": "Ask SideChat about the selected text"
+      "description": "Ask Claude about the selected text"
     }
   },
   "content_scripts": [

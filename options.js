@@ -14,7 +14,7 @@ $("save").onclick = async () => {
 };
 
 function toMarkdown(e) {
-  let md = `# ${e.turns[0]?.q || "SideChat"}\n\n_From: ${e.pageTitle} · ${e.pageUrl}_\n\n`;
+  let md = `# ${e.turns[0]?.q || "AskChatty"}\n\n_From: ${e.pageTitle} · ${e.pageUrl}_\n\n`;
   if (e.quote) md += "> " + e.quote.replace(/\n/g, "\n> ") + "\n\n";
   for (const t of e.turns) md += `**You:** ${t.q}\n\n${t.a}\n\n---\n\n`;
   return md;
@@ -84,7 +84,7 @@ async function render() {
 
 $("search").oninput = render;
 $("clear").onclick = async () => {
-  if (!confirm("Delete all SideChat history?")) return;
+  if (!confirm("Delete all AskChatty history?")) return;
   await chrome.storage.local.set({ history: [] });
   render();
 };
